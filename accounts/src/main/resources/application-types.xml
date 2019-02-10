@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="accountResponse" format="json">
+      <types:shape format="weave" example="examples/accountResponse.json"><![CDATA[%dw 2.0
+type accountResponse = Array<{|
+  id: String, 
+  firstName: String, 
+  lastName: String, 
+  address: String, 
+  postal: String, 
+  country: String, 
+  creationDate: String, 
+  accountType: String, 
+  miles: Number {"typeId": "int"}
+|}> {"MetadataFormat": "json",
+"example": "[{\"id\":\"100\",\"firstName\":\"Alice\",\"lastName\":\"Green\",\"address\":\"77 Geary St., San Francisco\",\"postal\":\"94108\",\"country\":\"USA\",\"creationDate\":\"2018-10-01T23:57:59Z+0:00\",\"accountType\":\"business\",\"miles\":1000},{\"id\":\"101\",\"firstName\":\"Kalle\",\"lastName\":\"Kula\",\"address\":\"88 Geary St., San Francisco\",\"postal\":\"94109\",\"country\":\"USA\",\"creationDate\":\"2018-10-02T23:57:59Z+0:00\",\"accountType\":\"persona\u00F6\",\"miles\":2000}]"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#9f539d0f-05bc-47b8-9078-a397f211e670">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="accountResponse"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#4b6cc700-1ca2-45be-980e-eac64cbe4514">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="accountResponse"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
